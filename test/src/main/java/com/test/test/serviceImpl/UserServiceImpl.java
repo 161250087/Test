@@ -1,15 +1,15 @@
-package com.test.test.service;
+package com.test.test.serviceImpl;
 
 import com.test.test.dao.UserRepository;
 import com.test.test.entity.User;
+import com.test.test.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-public class UserServiceImpl implements UserService{
-    @Autowired
-    private UserService userService;
+@Service("userService")
+public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
-
 
     @Override
     public int loginConfig(User user) {
@@ -22,21 +22,5 @@ public class UserServiceImpl implements UserService{
     public User findUserById(int id) {
         User u = userRepository.findById(id);
         return u;
-    }
-
-    @Override
-    public User findUserByName(String name) {
-        User u = userRepository.findByName(name);
-        return u;
-    }
-
-    @Override
-    public boolean addUser(User user) {
-        try{
-            userRepository.addUser(user.getName(),user.getPassword(),user.getMail());
-            return true;
-        }catch(Exception e){
-            return false;
-        }
     }
 }

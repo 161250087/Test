@@ -1,15 +1,11 @@
 package com.test.test.service;
 
 import com.test.test.entity.User;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 
-@Service
+@Repository
 public interface UserService {
-    public int loginConfig (User user);
+    public int loginConfig(User user);
 
     public User findUserById(int id);
-
-    public User findUserByName(String name);
-
-    public boolean addUser(User user);
 }
