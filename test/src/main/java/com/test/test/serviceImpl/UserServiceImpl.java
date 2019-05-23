@@ -13,14 +13,20 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int loginConfig(User user) {
-        User u = userRepository.userConfig(user.getName(),user.getPassword());
-        if(u==null) return -1;
-        else return u.getId();
+        User newUser = userRepository.userConfig(user.getName(),user.getPassword());
+        if(newUser==null) return -1;
+        else return user.getId();
     }
 
     @Override
     public User findUserById(int id) {
-        User u = userRepository.findById(id);
-        return u;
+        User user = userRepository.findById(id);
+        return user;
+    }
+
+    @Override
+    public String addUser(User user) {
+        userRepository.addUser(user.getName(),user.getPassword(),user.getMail());
+        return null;
     }
 }

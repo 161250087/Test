@@ -8,4 +8,6 @@ public interface UserService {
     public int loginConfig(User user);
 
     public User findUserById(int id);
+
+    public String addUser(User user);
 }
