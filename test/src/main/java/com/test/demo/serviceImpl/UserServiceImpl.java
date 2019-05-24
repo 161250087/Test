@@ -1,15 +1,15 @@
-package com.test.test.serviceImpl;
+package com.test.demo.serviceImpl;
 
-import com.test.test.dao.UserRepository;
-import com.test.test.entity.User;
-import com.test.test.service.UserService;
+import com.test.demo.dao.UserDao;
+import com.test.demo.entity.User;
+import com.test.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
     @Autowired
-    private UserRepository userRepository;
+    private UserDao userRepository;
 
     @Override
     public int loginConfig(User user) {

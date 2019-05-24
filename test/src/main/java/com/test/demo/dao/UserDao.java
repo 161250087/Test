@@ -1,6 +1,6 @@
-package com.test.test.dao;
+package com.test.demo.dao;
 
-import com.test.test.entity.User;
+import com.test.demo.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -10,7 +10,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
-public interface UserRepository extends JpaRepository<User,Integer> {
+public interface UserDao extends JpaRepository<User,Integer> {
     public User findById(int id);
 
     public User findByName(String name);
