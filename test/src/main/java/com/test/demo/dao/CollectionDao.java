@@ -11,6 +11,9 @@ import java.util.List;
 public interface CollectionDao extends JpaRepository<Collection,Integer> {
     public List<Collection> findAll();
 
+    @Query("select article_id from Collection where user_id = ?1")
+    public List<Integer> findCollectionByUser_id(int user_id);
+
     @Modifying
     @Transactional
     @Query(value="insert into collection(user_id,article_id,id) values(?1,?2,0)",nativeQuery = true)

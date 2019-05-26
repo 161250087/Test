@@ -28,4 +28,7 @@ public interface UserDao extends JpaRepository<User,Integer> {
 
     @Query("select a from Collection c,Article a where c.user_id=?1 and c.article_id = a.id")
     public List<Article> findArticleById(int id);
+
+    @Query("select a from Subscribe s,Article a where s.user_id=?1 and s.author = a.author")
+    public List<Article> findArticleByAuthor(int id);
 }

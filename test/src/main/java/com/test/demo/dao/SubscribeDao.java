@@ -11,6 +11,9 @@ import java.util.List;
 public interface SubscribeDao extends JpaRepository<Subscribe,Integer> {
     public List<Subscribe> findAll();
 
+    @Query("select author from Subscribe where user_id = ?1")
+    public List<String> findAuthorByUser_id(int user_id);
+
     @Modifying
     @Transactional
     @Query(value="insert into subscribe (user_id,author,id) values(?1,?2,0)",nativeQuery = true)
