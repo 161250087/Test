@@ -147,12 +147,17 @@ public class TestApplicationTests {
         User u1 = new User("vic111","123456");
         Assert.assertEquals(loginService.loginConfig(u1),-1);
         Assert.assertEquals(loginService.findUserById(1).getName(),"123");
+        Assert.assertEquals(loginService.addUser(u0),-1);
+        Assert.assertEquals(loginService.addUser(u1),1);
     }
 
     //UserService
     @Test
     public void testu(){
         Assert.assertEquals(userService.getAllArticle().size(),91);
+        Assert.assertEquals(userService.getArticleNum(),91);
+        Assert.assertEquals(userService.getAllArticlePage(1,5).get(0).getId(),1);
+        Assert.assertEquals(userService.getAllArticlePage(1,5).size(),5);
         Assert.assertEquals(userService.getFreshArtiche().size(),91);
         Assert.assertEquals(userService.sortByHot(userService.getAllArticle()).get(0).getId(),1);
         Assert.assertEquals(userService.addTag(1,"体育"),1);
@@ -178,11 +183,13 @@ public class TestApplicationTests {
 
     //ArticleService
     @Test
-    public void testa(){
+    public void testa() {
         articleService.AddHot(1);
-       // Assert.assertEquals(,6);
-        Assert.assertEquals(articleService.findArticle("音乐").size(),1);
-        //Assert.assertEquals(articleService.tag("音乐",28),true);
-       // Assert.assertEquals(articleService.tag("音乐",29),false);
+        Assert.assertEquals(userService.findArticleById(1), 6);
+        Assert.assertEquals(articleService.findArticle("音乐").size(), 1);
+        Assert.assertEquals(articleService.findFreshArticle("音乐").size(), 5);
+        Assert.assertEquals(articleService.findArticleNum("音乐"), 5);
+        Assert.assertEquals(articleService.freshArticle(), 90);
+        Assert.assertEquals(articleService.allArticle().size(), 91);
     }
 }
