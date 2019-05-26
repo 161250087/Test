@@ -29,4 +29,11 @@ public class LoginServiceImpl implements LoginService {
         userDao.addUser(user.getName(),user.getPassword());
         return null;
     }
+
+    @Override
+    public int findUserByName(String name) {
+        User u=userDao.findByName(name);
+        if(u==null) return -1;
+        return u.getId();
+    }
 }
