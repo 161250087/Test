@@ -1,4 +1,4 @@
-package com.test.test;
+package com.test.demo;
 
 import com.test.test.service.MailService;
 import org.junit.Test;
