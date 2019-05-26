@@ -18,12 +18,15 @@ public class Article_tag implements Serializable {
     @Column(name="article_id",nullable = false)
     private int article_id;
 
-    public void setArticle_id(int article_id) {
-        this.article_id = article_id;
+    @Column(name="tag",nullable = false)
+    private String tag;
+
+    public Article_tag(){
     }
 
-    public void setTag(String tag) {
-        this.tag = tag;
+    public Article_tag(int article_id,String tag){
+        this.article_id=article_id;
+        this.tag=tag;
     }
 
     public int getArticle_id() {
@@ -34,14 +37,11 @@ public class Article_tag implements Serializable {
         return tag;
     }
 
-    @Column(name="tag",nullable = false)
-    private String tag;
-
-    public Article_tag(){
+    public void setArticle_id(int article_id) {
+        this.article_id = article_id;
     }
 
-    public Article_tag(int article_id,String tag){
-        this.article_id=article_id;
-        this.tag=tag;
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 }
