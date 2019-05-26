@@ -77,6 +77,12 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    public int freshArticleNum() {
+        Timestamp timestamp = new Timestamp(new Date().getTime());
+        return articleDao.findFreshAllNum(timestamp);
+    }
+
+    @Override
     public List<Article> freshArticle() {
         Timestamp timestamp = new Timestamp(new Date().getTime());
         return articleDao.findFreshAll(timestamp);
@@ -85,5 +91,11 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public List<Article> allArticle() {
         return articleDao.findAll();
+    }
+
+    @Override
+    public List<Article> freshArticlePage(int start, int length) {
+        Timestamp timestamp = new Timestamp(new Date().getTime());
+        return articleDao.findFreshAllPage(start,length,timestamp);
     }
 }

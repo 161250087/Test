@@ -25,7 +25,11 @@ public interface ArticleService {
 
     public List<Article> findFreshHotArticle(String findstr);
 
+    public int freshArticleNum();
+
     public List<Article> freshArticle();
 
     public List<Article> allArticle();
+
+    public List<Article> freshArticlePage(int start,int length);
 }

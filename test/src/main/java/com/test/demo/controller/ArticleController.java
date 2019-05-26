@@ -1,15 +1,28 @@
 package com.test.demo.controller;
 
 
+import com.test.demo.service.ArticleService;
+import com.test.demo.service.UserService;
+import org.json.JSONArray;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
 @RestController
 @RequestMapping("/")
 public class ArticleController {
 
+
+    @Autowired
+    private ArticleService articleService;
+
+    @Autowired
+    private UserService userService;
 
     /**
      *@Author : LML
@@ -18,7 +31,7 @@ public class ArticleController {
      */
     @GetMapping("/getTotal")
     public int getAllArticlesCount(){
-        return 0;
+        return articleService.freshArticleNum();
     }
 
 
@@ -31,7 +44,7 @@ public class ArticleController {
      */
     @GetMapping("/getArticles/{index}")
     public String getArticesByIndex(@PathVariable int index){
-        return null;
+        return new JSONArray(articleService.freshArticlePage(index*5,5)).toString();
     }
 
 
@@ -39,12 +52,13 @@ public class ArticleController {
 
     @GetMapping("/getTotalByKeyword/{keyoword}")
     public int getAllArticlesCount(@PathVariable String keyword){
-        return 0;
+        return articleService.findFreshArticleNum(keyword);
     }
 
     @GetMapping("/getArticlesByKeyword/{index}")
     public String getArticesByIndexAndKeyword(@PathVariable int index){
-        return null;
+
+        return new JSONArray(articleService.findFreshArticlePage("",index*5,5)).toString();
     }
 
 
@@ -69,6 +83,6 @@ public class ArticleController {
      */
     @GetMapping("/getHotArticle/{keyword}")
     public String getHotArticles(@PathVariable String keyword) {
-        return null;
+        return new JSONArray(articleService.findFreshHotArticle(keyword)).toString();
     }
 }

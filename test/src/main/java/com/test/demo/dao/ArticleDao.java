@@ -18,8 +18,14 @@ public interface ArticleDao extends JpaRepository<Article,Integer>{
     @Query("from Article")
     public List<Article> findAll();
 
+    @Query(value="select * from article whereend > ?3 limit ?1,?2",nativeQuery = true)
+    public List<Article> findFreshAllPage(int start,int length,Timestamp timestamp);
+
     @Query(value="select * from article whereend > ?1",nativeQuery = true)
     public List<Article> findFreshAll(Timestamp timestamp);
+
+    @Query(value="select cpunt(*) from article whereend > ?1",nativeQuery = true)
+    public int findFreshAllNum(Timestamp timestamp);
 
     @Query(value="select * from article limit ?1,?2",nativeQuery = true)
     public List<Article> findSome(int start,int length);
