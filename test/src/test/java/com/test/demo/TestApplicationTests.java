@@ -72,13 +72,13 @@ public class TestApplicationTests {
         col.setUser_id(4);
         col.setArticle_id(5);
         Assert.assertEquals(col.getUser_id(),4);
-        Assert.assertEquals(col.getUser_id(),5);
+        Assert.assertEquals(col.getArticle_id(),5);
         //Article_tag
         Article_tag at = new Article_tag();
         at.setArticle_id(6);
         at.setTag("物理");
         Assert.assertEquals(at.getArticle_id(),6);
-        Assert.assertEquals(at.getTag(),"体育");
+        Assert.assertEquals(at.getTag(),"物理");
         //Article
         Article a = new Article();
         a.setAuthor("马帝");
@@ -99,7 +99,7 @@ public class TestApplicationTests {
 
     //data
     @Test
-    public void test1() throws  Exception{
+    public void test1(){
         //Article
         articleDao.addArticle("碳基材料及其锂硫电池应用","地点：化学楼C308","李峰",5,Timestamp.valueOf("2019-05-25 16:01:46"),Timestamp.valueOf("2019-05-30 10:00:00"),Timestamp.valueOf("2019-05-30 12:00:00"));
         articleDao.addArticle("有机金属大环和笼状化合物及其应用","地点：化学化工学院A216室","金国新",5,Timestamp.valueOf("2019-05-25 16:00:00"),Timestamp.valueOf("2019-05-31 10:00:00"),Timestamp.valueOf("2019-05-31 12:00:00"));
@@ -114,13 +114,6 @@ public class TestApplicationTests {
         articleDao.addArticle("美国政界的犹太人：20世纪30年代到90年代","地点：哲学楼446室","Fred A. Lazin",5,Timestamp.valueOf("2019-05-25 16:01:46"),Timestamp.valueOf("2019-05-31 18:00:00"),Timestamp.valueOf("2019-05-31 20:00:00"));
         articleDao.addArticle("草地音乐节","地点：炜华体育场","草地音乐节主办方",5,Timestamp.valueOf("2019-05-25 16:01:46"),Timestamp.valueOf("2019-05-31 19:00:00"),Timestamp.valueOf("2019-05-31 22:00:00"));
         articleDao.addArticle("南大杯足球决赛","地点：炜华体育场","南大足球队",5,Timestamp.valueOf("2019-05-25 16:01:46"),Timestamp.valueOf("2019-06-01 12:00:00"),Timestamp.valueOf("2019-06-01 14:00:00"));
-        //User
-        userDao.addUser("vic","123456");
-        userDao.addUser("andy","123456");
-        userDao.addUser("duck","654321");
-        userDao.addUser("madi","123madi");
-        //
-
     }
 
     @Test
