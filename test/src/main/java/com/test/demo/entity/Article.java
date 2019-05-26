@@ -94,6 +94,4 @@ public class Article implements Serializable {
     public Timestamp getStart(){return start;}
 
     public Timestamp getEnd(){return end;}
-
-
 }

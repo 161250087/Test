@@ -17,13 +17,11 @@ public interface UserDao extends JpaRepository<User,Integer> {
 
     public List<User> findAll();
 
-    @Query("from User where name=?1 and password=?2")
+    @Query("from user where name=?1 and password=?2")
     public User userConfig(String name,String password);
 
     @Modifying
     @Transactional
-    @Query(value="insert into User(name,password) values(?1,?2)",nativeQuery = true)
+    @Query(value="insert into user(name,password) values(?1,?2)",nativeQuery = true)
     public int addUser(String name,String password);
-
-
 }
