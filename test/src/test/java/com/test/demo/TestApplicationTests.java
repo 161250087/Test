@@ -185,10 +185,10 @@ public class TestApplicationTests {
     @Test
     public void testa() {
         articleService.AddHot(1);
-        Assert.assertEquals(userService.findArticleById(1), 6);
-        Assert.assertEquals(articleService.findArticle("音乐").size(), 1);
-        Assert.assertEquals(articleService.findFreshArticle("音乐").size(), 5);
-        Assert.assertEquals(articleService.findArticleNum("音乐"), 5);
+        Assert.assertEquals(userService.getAllArticle().get(0).getHot(), 6);
+        Assert.assertEquals(articleService.findArticle("体育").size(), 1);
+        Assert.assertEquals(articleService.findFreshArticle("体育").size(), 5);
+        Assert.assertEquals(articleService.findArticleNum("体育"), 5);
         Assert.assertEquals(articleService.freshArticle(), 90);
         Assert.assertEquals(articleService.allArticle().size(), 91);
     }
