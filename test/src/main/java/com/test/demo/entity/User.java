@@ -18,16 +18,12 @@ public class User implements Serializable {
     @Column(name="password",nullable = false)
     private String password;
 
-    @Column(name="mail",nullable = false)
-    private String mail;
-
     public User(){
     }
 
-    public User(String name,String password,String mail){
+    public User(String name,String password){
         this.name=name;
         this.password=password;
-        this.mail=mail;
     }
 
     public int getId(){
@@ -42,8 +38,6 @@ public class User implements Serializable {
         return password;
     }
 
-    public String getMail(){return mail;}
-
     public void setId(int id){
         this.id=id;
     }
@@ -55,6 +49,4 @@ public class User implements Serializable {
     public void setPassword(String password){
         this.password=password;
     }
-
-    public void setMail(String mail){this.mail=mail;}
 }
