@@ -2,6 +2,7 @@ package com.test.demo.serviceImpl;
 
 import com.test.demo.dao.ArticleDao;
 import com.test.demo.dao.Article_tagDao;
+import com.test.demo.dao.UserDao;
 import com.test.demo.entity.Article;
 import com.test.demo.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,8 @@ public class ArticleServiceImpl implements ArticleService {
     private ArticleDao articleDao;
     @Autowired
     private Article_tagDao article_tagDao;
+    @Autowired
+    private UserDao userDao;
 
     public void AddHot(int article_id){
         articleDao.AddHot(article_id);
@@ -58,6 +61,11 @@ public class ArticleServiceImpl implements ArticleService {
             }
         });
         return al;
+    }
+
+    @Override
+    public int findArticleNum(String findstr) {
+        return userDao.findArticleByStrNum(findstr);
     }
 
     @Override

@@ -13,6 +13,8 @@ public interface ArticleService {
 
     public List<Article> findFreshArticle(String findstr);
 
+    public int findArticleNum(String findstr);
+
     public List<Article> freshArticle();
 
     public List<Article> allArticle();

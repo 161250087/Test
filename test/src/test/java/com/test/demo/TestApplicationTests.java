@@ -2,6 +2,7 @@ package com.test.demo;
 
 import com.test.demo.dao.*;
 import com.test.demo.entity.*;
+import com.test.demo.service.LoginService;
 import com.test.demo.serviceImpl.ArticleServiceImpl;
 import com.test.demo.serviceImpl.UserServiceImpl;
 import org.junit.Assert;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.nio.file.attribute.UserPrincipalLookupService;
 import java.sql.Connection;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -19,6 +21,8 @@ import java.util.Date;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class TestApplicationTests {
+    @Autowired
+    public LoginService loginService;
     @Autowired
     public UserServiceImpl userService;
     @Autowired
@@ -131,5 +135,54 @@ public class TestApplicationTests {
         //subscribeDao.addSubscribe(1,"作者1");
         //user_tagDao.addUser_tag(1,"运动1");
         //articleService.AddHot(1);
+    }
+
+
+
+    //LoginService
+    @Test
+    public void testl(){
+        User u0 = new User("vic","123456");
+        Assert.assertEquals(loginService.loginConfig(u0),2);
+        User u1 = new User("vic111","123456");
+        Assert.assertEquals(loginService.loginConfig(u1),-1);
+        Assert.assertEquals(loginService.findUserById(1).getName(),"123");
+    }
+
+    //UserService
+    @Test
+    public void testu(){
+        Assert.assertEquals(userService.getAllArticle().size(),91);
+        Assert.assertEquals(userService.getFreshArtiche().size(),91);
+        Assert.assertEquals(userService.sortByHot(userService.getAllArticle()).get(0).getId(),1);
+        Assert.assertEquals(userService.addTag(1,"体育"),1);
+        Assert.assertEquals(userService.addTag(1,"体育"),-1);
+        userService.deleteTag(1,"体育");
+        Assert.assertEquals(userService.addTag(1,"体育"),1);
+        Assert.assertEquals(userService.getAllTag().size(),1);
+        Assert.assertEquals(userService.getMyTag(1).size(),1);
+        Assert.assertEquals(userService.addCollection(1,1),1);
+        Assert.assertEquals(userService.addCollection(1,1),-1);
+        userService.deleteCollection(1,1);
+        Assert.assertEquals(userService.addCollection(1,1),1);
+        Assert.assertEquals(userService.getMyCollection(1).size(),1);
+        Assert.assertEquals(userService.getMyFreshCollection(1).size(),1);
+        Assert.assertEquals(userService.addSubscribe(1,"李峰"),1);
+        Assert.assertEquals(userService.addSubscribe(1,"李峰"),-1);
+        userService.deleteSubscribe(1,"李峰");
+        Assert.assertEquals(userService.addSubscribe(1,"李峰"),1);
+        Assert.assertEquals(userService.getMySubscribe(1).size(),1);
+        Assert.assertEquals(userService.getMySubscribe_Article(1).size(),1);
+        Assert.assertEquals(userService.getMyFreshSubscribe_Article(1).size(),1);
+    }
+
+    //ArticleService
+    @Test
+    public void testa(){
+        articleService.AddHot(1);
+       // Assert.assertEquals(,6);
+        Assert.assertEquals(articleService.findArticle("音乐").size(),1);
+        //Assert.assertEquals(articleService.tag("音乐",28),true);
+       // Assert.assertEquals(articleService.tag("音乐",29),false);
     }
 }

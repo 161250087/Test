@@ -9,6 +9,10 @@ import java.util.List;
 public interface UserService {
     public List<Article> getAllArticle();
 
+    public int getArticleNum();
+
+    public List<Article> getAllArticlePage(int start,int end);
+
     public List<Article> getFreshArtiche();
 
     public List<Article> sortByHot(List<Article> articleList);

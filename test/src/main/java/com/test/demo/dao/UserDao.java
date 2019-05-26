@@ -5,6 +5,7 @@ import com.test.demo.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
@@ -31,4 +32,13 @@ public interface UserDao extends JpaRepository<User,Integer> {
 
     @Query("select a from Subscribe s,Article a where s.user_id=?1 and s.author = a.author")
     public List<Article> findArticleByAuthor(int id);
+
+    @Query("select count(a) as number from Subscribe s,Article a where s.user_id=?1 and s.author = a.author")
+    public int findArticleByAuthorNum(int id);
+
+    @Query(value="select a.* from article a,article_tag atg where a.title like '%fidnstr%' or a.author like '%findser%' or (a.id=atg.article_id and atg.tag like '%findser%')",nativeQuery = true)
+    public List<Article> findArticleByStr(@Param("findstr") String findser);
+
+    @Query(value="select count(a.*) from article a,article_tag atg where a.title like '%findstr%' or a.author like '%findser%' or (a.id=atg.article_id and atg.tag like '%findser%')",nativeQuery = true)
+    public int findArticleByStrNum(@Param("findstr") String findstr);
 }
