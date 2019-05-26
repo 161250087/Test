@@ -25,8 +25,9 @@ public class LoginServiceImpl implements LoginService {
     }
 
     @Override
-    public String addUser(User user) {
-        userDao.addUser(user.getName(),user.getPassword());
-        return null;
+    public int addUser(User user) {
+        if(userDao.findByName(user.getName())!=null)
+            return -1;
+        return userDao.addUser(user.getName(),user.getPassword());
     }
 }

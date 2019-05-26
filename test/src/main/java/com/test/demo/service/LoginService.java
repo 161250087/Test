@@ -9,5 +9,5 @@ public interface LoginService {
 
     public User findUserById(int id);
 
-    public String addUser(User user);
+    public int addUser(User user);
 }

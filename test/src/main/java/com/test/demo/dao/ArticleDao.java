@@ -12,8 +12,14 @@ import java.util.List;
 public interface ArticleDao extends JpaRepository<Article,Integer>{
     public Article findById(int id);
 
+    @Query("select count(id) as num from Article")
+    public int findAllNum();
+
     @Query("from Article")
     public List<Article> findAll();
+
+    @Query(value="select * from article limit ?1,?2",nativeQuery = true)
+    public List<Article> findSome(int start,int length);
 
     @Modifying
     @Transactional
