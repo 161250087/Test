@@ -10,17 +10,13 @@ import java.sql.Timestamp;
 import java.util.List;
 
 public interface ArticleDao extends JpaRepository<Article,Integer>{
-    public Article findById();
+    public Article findById(int id);
 
-    public Article findByAuthor();
-
-    public Article findByTitle();
-
-    @Query("from article")
+    @Query("from Article")
     public List<Article> findAll();
 
     @Modifying
     @Transactional
-    @Query(value="insert into artivle(title,content,author,hot,publish_time,start,end) values(?1,?2,?3,?4,?5,?6,?7)",nativeQuery = true)
+    @Query(value="insert into article(title,content,author,hot,publish_time,start,end) values(?1,?2,?3,?4,?5,?6,?7)",nativeQuery = true)
     public int addArticle(String title, String content, String author, int hot, Timestamp publish_time, Timestamp start, Timestamp end);
 }

@@ -2,7 +2,6 @@ package com.test.demo.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
 @Table(name="user")
@@ -49,35 +48,5 @@ public class User implements Serializable {
 
     public void setPassword(String password){
         this.password=password;
-    }
-
-    private List<String> tagList;
-
-    public List<String> getTagList(){
-        return tagList;
-    }
-
-    public void setTagList(List<String> tagList){
-        this.tagList=tagList;
-    }
-
-    public List<Integer> collectionList;
-
-    public List<Integer> getCollectionList(){
-        return collectionList;
-    }
-
-    public void  setCollectionList(List<Integer> collectionList){
-        this.collectionList=collectionList;
-    }
-
-    private List<String> subscribeList;
-
-    public List<String> getSubscribeList(){
-        return subscribeList;
-    }
-
-    public void setSubscribeList(List<String> subscribeList){
-        this.subscribeList=subscribeList;
     }
 }

@@ -17,7 +17,7 @@ public interface UserDao extends JpaRepository<User,Integer> {
 
     public List<User> findAll();
 
-    @Query("from user where name=?1 and password=?2")
+    @Query("from User where name=?1 and password=?2")
     public User userConfig(String name,String password);
 
     @Modifying

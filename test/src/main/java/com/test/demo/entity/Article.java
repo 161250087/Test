@@ -3,7 +3,6 @@ package com.test.demo.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.List;
 
 @Entity
 @Table(name="article")
@@ -35,8 +34,6 @@ public class Article implements Serializable {
     @Column(name="end",nullable = false)
     private Timestamp end;
 
-    private List<String> tagList;
-
     public Article(){
     }
 
@@ -65,10 +62,6 @@ public class Article implements Serializable {
     public Timestamp getStart(){return start;}
 
     public Timestamp getEnd(){return end;}
-
-    public List<String> getTagList(){
-        return tagList;
-    }
 
     public void setTitle(String title) {
         this.title = title;

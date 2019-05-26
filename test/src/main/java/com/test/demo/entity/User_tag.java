@@ -1,14 +1,20 @@
 package com.test.demo.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name="user_tag")
 public class User_tag implements Serializable{
     private static final long serialVersionUID=1L;
+
+    @Id
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid")
+    private String id;
+
     @Column(name="user_id",nullable = false)
     private int user_id;
 
@@ -33,5 +39,4 @@ public class User_tag implements Serializable{
     public void setTag(String tag) {
         this.tag = tag;
     }
-
 }

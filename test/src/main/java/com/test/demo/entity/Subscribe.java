@@ -1,14 +1,20 @@
 package com.test.demo.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name="subscribe")
 public class Subscribe implements Serializable {
     private static final long serialVersionUID=1L;
+
+    @Id
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid")
+    private String id;
+
     @Column(name="author",nullable = false)
     private String author;
 
