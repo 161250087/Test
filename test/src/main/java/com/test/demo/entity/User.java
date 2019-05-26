@@ -2,6 +2,7 @@ package com.test.demo.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name="user")
@@ -18,16 +19,12 @@ public class User implements Serializable {
     @Column(name="password",nullable = false)
     private String password;
 
-    @Column(name="mail",nullable = false)
-    private String mail;
-
     public User(){
     }
 
-    public User(String name,String password,String mail){
+    public User(String name,String password){
         this.name=name;
         this.password=password;
-        this.mail=mail;
     }
 
     public int getId(){
@@ -42,8 +39,6 @@ public class User implements Serializable {
         return password;
     }
 
-    public String getMail(){return mail;}
-
     public void setId(int id){
         this.id=id;
     }
@@ -56,5 +51,33 @@ public class User implements Serializable {
         this.password=password;
     }
 
-    public void setMail(String mail){this.mail=mail;}
+    private List<String> tagList;
+
+    public List<String> getTagList(){
+        return tagList;
+    }
+
+    public void setTagList(List<String> tagList){
+        this.tagList=tagList;
+    }
+
+    public List<Integer> collectionList;
+
+    public List<Integer> getCollectionList(){
+        return collectionList;
+    }
+
+    public void  setCollectionList(List<Integer> collectionList){
+        this.collectionList=collectionList;
+    }
+
+    private List<String> subscribeList;
+
+    public List<String> getSubscribeList(){
+        return subscribeList;
+    }
+
+    public void setSubscribeList(List<String> subscribeList){
+        this.subscribeList=subscribeList;
+    }
 }

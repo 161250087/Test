@@ -9,24 +9,24 @@ import org.springframework.stereotype.Service;
 @Service("userService")
 public class UserServiceImpl implements UserService {
     @Autowired
-    private UserDao userRepository;
+    private UserDao userDao;
 
     @Override
     public int loginConfig(User user) {
-        User newUser = userRepository.userConfig(user.getName(),user.getPassword());
+        User newUser = userDao.userConfig(user.getName(),user.getPassword());
         if(newUser==null) return -1;
         else return newUser.getId();
     }
 
     @Override
     public User findUserById(int id) {
-        User user = userRepository.findById(id);
+        User user = userDao.findById(id);
         return user;
     }
 
     @Override
     public String addUser(User user) {
-        userRepository.addUser(user.getName(),user.getPassword(),user.getMail());
+        userDao.addUser(user.getName(),user.getPassword());
         return null;
     }
 }

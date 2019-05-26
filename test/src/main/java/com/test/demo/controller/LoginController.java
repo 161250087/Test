@@ -28,7 +28,6 @@ public class LoginController {
         User user = new User();
         user.setName(name);
         user.setPassword(password);
-        user.setMail(email);
         System.out.print("zhuce username"+name+ "password "+password);
         userService.addUser(user);
         return "";
