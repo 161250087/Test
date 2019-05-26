@@ -2,7 +2,7 @@ package com.test.demo.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name="article")
@@ -32,15 +32,15 @@ public class Article implements Serializable {
         this.hot = hot;
     }
 
-    public void setPublish_time(Date publish_time) {
+    public void setPublish_time(Timestamp publish_time) {
         this.publish_time = publish_time;
     }
 
-    public void setStart(Date start) {
+    public void setStart(Timestamp start) {
         this.start = start;
     }
 
-    public void setEnd(Date end) {
+    public void setEnd(Timestamp end) {
         this.end = end;
     }
 
@@ -54,18 +54,18 @@ public class Article implements Serializable {
     private int hot;
 
     @Column(name="publish_time",nullable = false)
-    private Date publish_time;
+    private Timestamp publish_time;
 
     @Column(name="start",nullable = false)
-    private Date start;
+    private Timestamp start;
 
     @Column(name="end",nullable = false)
-    private Date end;
+    private Timestamp end;
 
     public Article(){
     }
 
-    public Article(String title,String content,String author,int hot,Date publish_time,Date start,Date end){
+    public Article(String title,String content,String author,int hot,Timestamp publish_time,Timestamp start,Timestamp end){
         this.title=title;
         this.content=content;
         this.author=author;
@@ -89,11 +89,11 @@ public class Article implements Serializable {
 
     public int getHot(){return hot;}
 
-    public Date getPublish_time(){return publish_time;}
+    public Timestamp getPublish_time(){return publish_time;}
 
-    public Date getStart(){return start;}
+    public Timestamp getStart(){return start;}
 
-    public Date getEnd(){return end;}
+    public Timestamp getEnd(){return end;}
 
 
 }
