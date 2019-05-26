@@ -12,6 +12,17 @@ public class Collection implements Serializable{
     @Column(name="article_id",nullable = false)
     private int article_id;
 
+    @Column(name="user_id",nullable = false)
+    private int user_id;
+
+    public Collection(){
+    }
+
+    public Collection(int article_id,int user_id){
+        this.article_id=article_id;
+        this.user_id=user_id;
+    }
+
     public void setArticle_id(int article_id) {
         this.article_id = article_id;
     }
@@ -26,16 +37,5 @@ public class Collection implements Serializable{
 
     public int getUser_id() {
         return user_id;
-    }
-
-    @Column(name="user_id",nullable = false)
-    private int user_id;
-
-    public Collection(){
-    }
-
-    public Collection(int article_id,int user_id){
-        this.article_id=article_id;
-        this.user_id=user_id;
     }
 }
