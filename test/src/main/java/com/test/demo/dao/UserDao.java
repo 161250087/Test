@@ -1,5 +1,6 @@
 package com.test.demo.dao;
 
+import com.test.demo.entity.Article;
 import com.test.demo.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -24,4 +25,7 @@ public interface UserDao extends JpaRepository<User,Integer> {
     @Transactional
     @Query(value="insert into user(name,password) values(?1,?2)",nativeQuery = true)
     public int addUser(String name,String password);
+
+    @Query("select a from Collection c,Article a where c.user_id=?1 and c.article_id = a.id")
+    public List<Article> findArticleById(int id);
 }

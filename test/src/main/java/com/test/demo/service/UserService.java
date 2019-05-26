@@ -1,13 +1,13 @@
 package com.test.demo.service;
 
-import com.test.demo.entity.User;
+import com.test.demo.entity.Article;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface UserService {
-    public int loginConfig(User user);
+    public List<Article> getAllArticle();
 
-    public User findUserById(int id);
-
-    public String addUser(User user);
+    public List<Article> sortByHot(List<Article> articleList);
 }

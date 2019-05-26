@@ -1,32 +1,39 @@
 package com.test.demo.serviceImpl;
 
+import com.test.demo.dao.ArticleDao;
 import com.test.demo.dao.UserDao;
-import com.test.demo.entity.User;
+import com.test.demo.entity.Article;
 import com.test.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private ArticleDao articleDao;
 
     @Override
-    public int loginConfig(User user) {
-        User newUser = userDao.userConfig(user.getName(),user.getPassword());
-        if(newUser==null) return -1;
-        else return newUser.getId();
+    public List<Article> getAllArticle() {
+        return articleDao.findAll();
     }
 
     @Override
-    public User findUserById(int id) {
-        User user = userDao.findById(id);
-        return user;
+    public List<Article> sortByHot(List<Article> articleList) {
+        List<Article> list = articleList;
+        Collections.sort(list, new Comparator<Article>() {
+            @Override
+            public int compare(Article o1, Article o2) {
+                return o1.getHot()>o2.getHot()?1:0;
+            }
+        });
+        return list;
     }
 
-    @Override
-    public String addUser(User user) {
-        userDao.addUser(user.getName(),user.getPassword());
-        return null;
-    }
+
 }

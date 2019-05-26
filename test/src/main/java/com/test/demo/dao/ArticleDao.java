@@ -19,4 +19,9 @@ public interface ArticleDao extends JpaRepository<Article,Integer>{
     @Transactional
     @Query(value="insert into article(title,content,author,hot,publish_time,start,end) values(?1,?2,?3,?4,?5,?6,?7)",nativeQuery = true)
     public int addArticle(String title, String content, String author, int hot, Timestamp publish_time, Timestamp start, Timestamp end);
+
+    @Modifying
+    @Transactional
+    @Query(value="update article set hot = hot+1 where id=?1",nativeQuery = true)
+    public void AddHot(int id);
 }

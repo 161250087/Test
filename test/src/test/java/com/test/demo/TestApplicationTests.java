@@ -1,20 +1,25 @@
 package com.test.demo;
 
-import com.test.demo.dao.ArticleDao;
-import com.test.demo.dao.Article_tagDao;
-import com.test.demo.dao.CollectionDao;
-import org.junit.Assert;
+import com.test.demo.dao.*;
+import com.test.demo.entity.Article;
+import com.test.demo.serviceImpl.ArticleServiceImpl;
+import com.test.demo.serviceImpl.UserServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.List;
+import java.sql.Timestamp;
+import java.util.Date;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class TestApplicationTests {
+    @Autowired
+    public UserServiceImpl userService;
+    @Autowired
+    public ArticleServiceImpl articleService;
     @Autowired
     public ArticleDao articleDao;
 
@@ -23,6 +28,12 @@ public class TestApplicationTests {
 
     @Autowired
     public CollectionDao collectionDao;
+
+    @Autowired
+    public SubscribeDao subscribeDao;
+
+    @Autowired
+    public User_tagDao user_tagDao;
 
     @Test
     public void test() throws Exception{
@@ -34,17 +45,22 @@ public class TestApplicationTests {
 
     @Test
     public void test1() throws  Exception{
-        //mailService.sendSimpleMail("1293086146@qq.com","FUCK","FUCK");
-        Assert.assertEquals("","");
+        //subscribeDao.deleteSubscribe(1,"作者1");
+        for(Article a:userService.sortByHot(userService.getAllArticle()))
+            System.out.println(a.getTitle());
     }
 
     @Test
     public void test2() throws  Exception{
-        /*Timestamp timeStamp = new Timestamp(new Date().getTime());
-        articleDao.addArticle("题目","内容","作者",0,timeStamp,timeStamp,timeStamp);*/
+        Timestamp timeStamp = new Timestamp(new Date().getTime());
+        articleDao.addArticle("题目1","内容1","作者1",5,timeStamp,timeStamp,timeStamp);
+        articleDao.addArticle("题目2","内容2","作者2",15,timeStamp,timeStamp,timeStamp);
+        articleDao.addArticle("题目3","内容3","作者3",7,timeStamp,timeStamp,timeStamp);
         //System.out.print(articleDao.findAll().get(0).getAuthor());
-
-        List<Object> list =collectionDao.findArticleById(1);
-        //System.out.print(System.out.printf(list.get(0));
+        //collectionDao.deleteCollection(1,2);
+        //article_tagDao.addArticle_tag(1,"运动1");
+        //subscribeDao.addSubscribe(1,"作者1");
+        //user_tagDao.addUser_tag(1,"运动1");
+        //articleService.AddHot(1);
     }
 }
