@@ -9,6 +9,8 @@ import java.util.List;
 public interface ArticleService {
     public void AddHot(int article_id);
 
+    public Article findArticleById(int article_id);
+
     public List<Article> findArticle(String findstr);
 
     public List<Article> findFreshArticle(String findstr);

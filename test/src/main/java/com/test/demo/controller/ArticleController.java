@@ -4,14 +4,13 @@ package com.test.demo.controller;
 import com.test.demo.service.ArticleService;
 import com.test.demo.service.UserService;
 import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.sql.Timestamp;
-import java.util.Date;
 
 @RestController
 @RequestMapping("/")
@@ -55,22 +54,22 @@ public class ArticleController {
         return articleService.findFreshArticleNum(keyword);
     }
 
-    @GetMapping("/getArticlesByKeyword/{index}")
-    public String getArticesByIndexAndKeyword(@PathVariable int index){
+    @GetMapping("/getArticlesByKeyword/{keyword}/{index}")
+    public String getArticesByIndexAndKeyword(@PathVariable String keyword,@PathVariable int index){
 
-        return new JSONArray(articleService.findFreshArticlePage("",index*5,5)).toString();
+        return new JSONArray(articleService.findFreshArticlePage(keyword,index*5,5)).toString();
     }
 
 
 
     @GetMapping("/getTotalByKTag/{keyoword}")
     public int getAllArticlesCountByTag(@PathVariable String keyword){
-        return 0;
+        return articleService.findFreshArticleNum(keyword);
     }
 
-    @GetMapping("/getArticlesByTag/{index}")
-    public String getArticesByIndexAndTag(@PathVariable int index){
-        return null;
+    @GetMapping("/getArticlesByTag/{keyword}/{index}")
+    public String getArticesByIndexAndTag(@PathVariable String keyword,@PathVariable int index){
+        return new JSONArray(articleService.findFreshArticlePage(keyword,index*5,5)).toString();
     }
 
 
@@ -84,5 +83,10 @@ public class ArticleController {
     @GetMapping("/getHotArticle/{keyword}")
     public String getHotArticles(@PathVariable String keyword) {
         return new JSONArray(articleService.findFreshHotArticle(keyword)).toString();
+    }
+
+    @GetMapping("/getArticleDetail/{id}")
+    public String getHotArticles(@PathVariable int id) {
+        return new JSONObject(articleService.findArticleById(id)).toString();
     }
 }

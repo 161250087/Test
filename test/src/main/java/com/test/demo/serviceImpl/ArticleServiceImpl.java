@@ -25,25 +25,30 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    public Article findArticleById(int article_id) {
+        return articleDao.findById(article_id);
+    }
+
+    @Override
     public List<Article> findArticle(String findstr) {
-        return articleDao.findArticleByStr(findstr);
+        return articleDao.findArticleByStr("%"+findstr+"%");
     }
 
     @Override
     public List<Article> findFreshArticle(String findstr) {
         Timestamp timestamp = new Timestamp(new Date().getTime());
-        return articleDao.findFreshArticleByStr(findstr,timestamp);
+        return articleDao.findFreshArticleByStr("%"+findstr+"%",timestamp);
     }
 
     @Override
     public List<Article> findArticlePage(String findstr, int start, int length) {
-        return articleDao.findArticleByStrPage(findstr,start,length);
+        return articleDao.findArticleByStrPage("%"+findstr+"%",start,length);
     }
 
     @Override
     public List<Article> findFreshArticlePage(String findstr, int start, int length) {
         Timestamp timestamp = new Timestamp(new Date().getTime());
-        return articleDao.findFreshArticleByStrPage(findstr,start,length,timestamp);
+        return articleDao.findFreshArticleByStrPage("%"+findstr+"%",start,length,timestamp);
     }
 
     private boolean tag(String findstr,int article_id){
@@ -56,24 +61,24 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public int findArticleNum(String findstr) {
-        return articleDao.findArticleByStrNum(findstr);
+        return articleDao.findArticleByStrNum("%"+findstr+"%");
     }
 
     @Override
     public int findFreshArticleNum(String findstr) {
         Timestamp timestamp = new Timestamp(new Date().getTime());
-        return articleDao.findFreshArticleByStrNum(findstr,timestamp);
+        return articleDao.findFreshArticleByStrNum("%"+findstr+"%",timestamp);
     }
 
     @Override
     public List<Article> findHotArticle(String findstr) {
-        return articleDao.findHotArticleByStr(findstr);
+        return articleDao.findHotArticleByStr("%"+findstr+"%");
     }
 
     @Override
     public List<Article> findFreshHotArticle(String findstr) {
         Timestamp timestamp = new Timestamp(new Date().getTime());
-        return articleDao.findFreshHotArticleByStr(findstr,timestamp);
+        return articleDao.findFreshHotArticleByStr("%"+findstr+"%",timestamp);
     }
 
     @Override
