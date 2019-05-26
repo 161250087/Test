@@ -34,20 +34,17 @@ public class LoginController {
         return "";
     }
 
-    @RequestMapping(value = "/loginVerify",method = RequestMethod.POST)
+    @RequestMapping(value = "/loginVerify/{name}/{password}",method = RequestMethod.POST)
     @ResponseBody
-    public String loginVerify(HttpServletRequest request, HttpServletResponse response){
+    public String loginVerify(@PathVariable String name,@PathVariable String password){
         System.out.print("logintrigger");
-        response.setHeader("Access-Control-Allow-Origin", "*");
-        String name = request.getParameter("name");
-        String password = request.getParameter("password");
         User user = new User();
         user.setName(name);
         user.setPassword(password);
         System.out.print("denglu username"+name+ "password "+password);
         int id = userService.loginConfig(user);
-        if(id != -1){
-            return "true";
+        if(id == -1){
+            return "false";
         }else{
             return ""+id;
         }

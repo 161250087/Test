@@ -15,7 +15,7 @@ public class UserServiceImpl implements UserService {
     public int loginConfig(User user) {
         User newUser = userRepository.userConfig(user.getName(),user.getPassword());
         if(newUser==null) return -1;
-        else return user.getId();
+        else return newUser.getId();
     }
 
     @Override
