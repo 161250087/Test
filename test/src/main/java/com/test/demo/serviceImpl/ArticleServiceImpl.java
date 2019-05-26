@@ -8,6 +8,7 @@ import com.test.demo.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.*;
 
 @Service("articleServiceImpl")
@@ -25,13 +26,24 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public List<Article> findArticle(String findstr) {
-        List<Article> al=articleDao.findAll();
-        List<Article> anlist = new ArrayList();
-        for(Article a:al){
-            if(a.getTitle().contains(findstr)||a.getAuthor().contains(findstr)||tag(findstr,a.getId()))
-                anlist.add(a);
-        }
-        return anlist;
+        return articleDao.findArticleByStr(findstr);
+    }
+
+    @Override
+    public List<Article> findFreshArticle(String findstr) {
+        Timestamp timestamp = new Timestamp(new Date().getTime());
+        return articleDao.findFreshArticleByStr(findstr,timestamp);
+    }
+
+    @Override
+    public List<Article> findArticlePage(String findstr, int start, int length) {
+        return articleDao.findArticleByStrPage(findstr,start,length);
+    }
+
+    @Override
+    public List<Article> findFreshArticlePage(String findstr, int start, int length) {
+        Timestamp timestamp = new Timestamp(new Date().getTime());
+        return articleDao.findFreshArticleByStrPage(findstr,start,length,timestamp);
     }
 
     private boolean tag(String findstr,int article_id){
@@ -43,50 +55,31 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public List<Article> findFreshArticle(String findstr) {
-        List<Article> al=findArticle(findstr);
-
-        Date date = new Date();
-        for(Article a:al)
-            if(date.after(a.getEnd()))
-                al.remove(a);
-
-        Collections.sort(al, new Comparator<Article>() {
-            @Override
-            public int compare(Article o1, Article o2) {
-                Date d1 = o1.getStart(),d2=o2.getStart();
-                if(d1.after(d2))
-                    return 1;
-                return -1;
-            }
-        });
-        return al;
+    public int findArticleNum(String findstr) {
+        return articleDao.findArticleByStrNum(findstr);
     }
 
     @Override
-    public int findArticleNum(String findstr) {
-        return userDao.findArticleByStrNum(findstr);
+    public int findFreshArticleNum(String findstr) {
+        Timestamp timestamp = new Timestamp(new Date().getTime());
+        return articleDao.findFreshArticleByStrNum(findstr,timestamp);
+    }
+
+    @Override
+    public List<Article> findHotArticle(String findstr) {
+        return articleDao.findHotArticleByStr(findstr);
+    }
+
+    @Override
+    public List<Article> findFreshHotArticle(String findstr) {
+        Timestamp timestamp = new Timestamp(new Date().getTime());
+        return articleDao.findFreshHotArticleByStr(findstr,timestamp);
     }
 
     @Override
     public List<Article> freshArticle() {
-        List<Article> al=articleDao.findAll();
-
-        Date date = new Date();
-        for(Article a:al)
-            if(date.after(a.getEnd()))
-                al.remove(a);
-
-        Collections.sort(al, new Comparator<Article>() {
-            @Override
-            public int compare(Article o1, Article o2) {
-                Date d1 = o1.getStart(),d2=o2.getStart();
-                if(d1.after(d2))
-                    return 1;
-                return -1;
-            }
-        });
-        return al;
+        Timestamp timestamp = new Timestamp(new Date().getTime());
+        return articleDao.findFreshAll(timestamp);
     }
 
     @Override
