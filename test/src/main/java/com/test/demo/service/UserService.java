@@ -7,39 +7,55 @@ import java.util.List;
 
 @Repository
 public interface UserService {
+    //获取所有文章
     public List<Article> getAllArticle();
 
+    //获取全部文章数量
     public int getArticleNum();
 
-    public List<Article> getAllArticlePage(int start,int end);
+    //文章分页显示，通过起始行以及页长分页
+    public List<Article> getAllArticlePage(int start, int end);
 
-    public List<Article> getFreshArtiche();
+    //给用户加标签
+    public int addTag(int user_id, String tag);
 
-    public List<Article> sortByHot(List<Article> articleList);
+    //删除用户标签
+    public void deleteTag(int user_id, String tag);
 
-    public int addTag(int user_id,String tag);
-
-    public void deleteTag(int user_id,String tag);
-
+    //获取所有用户标签
     public List<String> getAllTag();
 
+    //获取指定用户标签
     public List<String> getMyTag(int user_id);
 
-    public int addCollection(int user_id,int article_id);
+    //添加收藏
+    public int addCollection(int user_id, int article_id);
 
-    public void deleteCollection(int user_id,int article_id);
+    //删除收藏
+    public void deleteCollection(int user_id, int article_id);
 
+    //获取指定用户收藏
     public List<Article> getMyCollection(int user_id);
 
+    //获取指定用户未过期收藏
     public List<Article> getMyFreshCollection(int user_id);
 
-    public int addSubscribe(int user_id,String author);
+    //添加订阅
+    public int addSubscribe(int user_id, String author);
 
-    public void deleteSubscribe(int user_id,String author);
+    //取消订阅
+    public void deleteSubscribe(int user_id, String author);
 
+    //获取指定用户订阅
     public List<String> getMySubscribe(int user_id);
 
+    //获取指定用户订阅作者的所有文章
     public List<Article> getMySubscribe_Article(int user_id);
 
+    //获取指定用户订阅作者的所有未过时文章
     public List<Article> getMyFreshSubscribe_Article(int user_id);
+    //消息推送，已开始以及两天内开始
+    public List<Article> remindMessage(int user_id);
+    //根据用户爱好推送热点
+    public List<Article> hotPush(int user_id);
 }

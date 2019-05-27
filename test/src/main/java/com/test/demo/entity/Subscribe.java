@@ -11,9 +11,8 @@ public class Subscribe implements Serializable {
     private static final long serialVersionUID=1L;
 
     @Id
-    @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid", strategy = "uuid")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     @Column(name="author",nullable = false)
     private String author;

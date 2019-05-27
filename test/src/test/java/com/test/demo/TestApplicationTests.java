@@ -151,8 +151,7 @@ public class TestApplicationTests {
         Assert.assertEquals(userService.getArticleNum(),91);
         Assert.assertEquals(userService.getAllArticlePage(1,5).get(0).getId(),1);
         Assert.assertEquals(userService.getAllArticlePage(1,5).size(),5);
-        Assert.assertEquals(userService.getFreshArtiche().size(),91);
-        Assert.assertEquals(userService.sortByHot(userService.getAllArticle()).get(0).getId(),1);
+
         Assert.assertEquals(userService.addTag(1,"体育"),1);
         Assert.assertEquals(userService.addTag(1,"体育"),-1);
         userService.deleteTag(1,"体育");
@@ -184,5 +183,15 @@ public class TestApplicationTests {
         Assert.assertEquals(articleService.findArticleNum("体育"), 5);
         Assert.assertEquals(articleService.freshArticle(), 90);
         Assert.assertEquals(articleService.allArticle().size(), 91);
+    }
+
+    @Test
+    public void test125(){
+        System.out.println(articleService.findFreshArticleNum("李峰"));
+    }
+
+    @Test
+    public void test1251(){
+        System.out.println(articleService.findFreshHotArticle("体育").size());
     }
 }

@@ -6,10 +6,7 @@ import com.test.demo.service.UserService;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -49,7 +46,7 @@ public class ArticleController {
 
 
 
-    @GetMapping("/getTotalByKeyword/{keyoword}")
+    @GetMapping("/getTotalByKeyword/{keyword}")
     public int getAllArticlesCount(@PathVariable String keyword){
         return articleService.findFreshArticleNum(keyword);
     }
@@ -82,11 +79,59 @@ public class ArticleController {
      */
     @GetMapping("/getHotArticle/{keyword}")
     public String getHotArticles(@PathVariable String keyword) {
+        System.out.println(keyword);
+        System.out.println(new JSONArray(articleService.findFreshHotArticle(keyword)).toString());
         return new JSONArray(articleService.findFreshHotArticle(keyword)).toString();
     }
 
     @GetMapping("/getArticleDetail/{id}")
-    public String getHotArticles(@PathVariable int id) {
+    public String getArticleDetail(@PathVariable int id) {
+        articleService.AddHot(id);
         return new JSONObject(articleService.findArticleById(id)).toString();
+    }
+
+
+
+    @PostMapping("/addInterset/{userID}/{author}")
+    public int  addInterset(@PathVariable int userID,@PathVariable String author){
+        return userService.addSubscribe(userID,author);
+    }
+
+    @PostMapping("/addCollection/{userID}/{articleID}")
+    public int addCollection(@PathVariable int userID,@PathVariable int articleID){
+        return userService.addCollection(userID,articleID);
+    }
+
+    @GetMapping ("/getCollectionCount/{userID}")
+    public int getCollectionCount(@PathVariable int userID){
+        return userService.getMyFreshCollection(userID).size();
+    }
+
+
+    @GetMapping ("/getCollection/{userID}")
+    public String getCollection(@PathVariable int userID){
+        return new JSONArray(userService.getMyFreshCollection(userID)).toString();
+    }
+
+    @GetMapping ("/getConcern/{userID}")
+    public String getConcern(@PathVariable int userID){
+        return new JSONArray(userService.getMySubscribe(userID)).toString();
+    }
+
+    @GetMapping ("/getMessage/{userID}")
+    public String getMessage(@PathVariable int userID){
+        return new JSONArray(userService.remindMessage(userID)).toString();
+    }
+
+    //得到标签
+    @GetMapping ("/getArticleTags/{id}")
+    public String getArticleTags(@PathVariable int id){
+        return new JSONArray(articleService.findArticleTagById(id)).toString();
+    }
+
+    //获取推荐列表
+    @GetMapping ("/getRecommend/{id}")
+    public String getRecommend(@PathVariable int id){
+        return new JSONArray(userService.hotPush(id)).toString();
     }
 }
