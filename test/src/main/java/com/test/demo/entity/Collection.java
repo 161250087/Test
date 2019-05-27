@@ -11,9 +11,8 @@ public class Collection implements Serializable{
     private static final long serialVersionUID=1L;
 
     @Id
-    @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid", strategy = "uuid")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     @Column(name="article_id",nullable = false)
     private int article_id;

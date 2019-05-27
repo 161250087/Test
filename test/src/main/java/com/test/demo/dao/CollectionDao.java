@@ -19,7 +19,7 @@ public interface CollectionDao extends JpaRepository<Collection,Integer> {
     //新增收藏
     @Modifying
     @Transactional
-    @Query(value="insert into collection(user_id,article_id,id) values(?1,?2,0)",nativeQuery = true)
+    @Query(value="insert into collection(user_id,article_id) values(?1,?2)",nativeQuery = true)
     public void addCollection(int user_id, int article_id);
 
     //删除收藏
